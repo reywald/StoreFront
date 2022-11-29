@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from django.db.models import Q
+from django.db.models import Q, F
 from store.models import Product
 
 
 def say_hello(request):
-    products = Product.objects.filter(Q(inventory__lt=10) & ~Q(unit_price__lt=20))
+    products = Product.objects.filter(inventory=F('collection__id'))
 
     return render(request, "hello.html", {"name": "Ikechukwu Agbarakwe", "products": list(products)})
