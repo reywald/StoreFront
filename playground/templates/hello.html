@@ -11,11 +11,25 @@
     <h1>Hello {{ name }}</h1>
     {% else %}
     <h1>Hello World</h1>
-    {% endif %} {% comment %} {{ product.title }} {% endcomment %}
-    <ul>
-      {% for product in products %}
-      <li>{{ product.title }} -- {{ product.unit_price }}</li>
-      {% endfor %}
-    </ul>
+    {% endif %}
+    <table>
+      <thead>
+        <tr>
+          <th>Order</th>
+          <th>Order Date</th>
+          <th>Customer</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for order in orders %}
+        <tr>
+          <td>{{ order.id }}: </td>
+          <td>{{ order.placed_at }}: </td>
+          <td>{{ order.customer.first_name }} {{ order.customer.last_name }} </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </tabl>
   </body>
 </html>
