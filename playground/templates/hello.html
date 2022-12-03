@@ -12,24 +12,7 @@
     {% else %}
     <h1>Hello World</h1>
     {% endif %}
-    <table>
-      <thead>
-        <tr>
-          <th>Order</th>
-          <th>Order Date</th>
-          <th>Customer</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {% for order in orders %}
-        <tr>
-          <td>{{ order.id }}: </td>
-          <td>{{ order.placed_at }}: </td>
-          <td>{{ order.customer.first_name }} {{ order.customer.last_name }} </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </tabl>
+    
+    {{ result.count }} {{ result.min }}
   </body>
 </html>
