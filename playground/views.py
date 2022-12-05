@@ -6,10 +6,6 @@ from tags.models import TaggedItem
 
 def say_hello(request):
 
-    contenttype = ContentType.objects.get_for_model(Product)
-
-    result = TaggedItem.objects \
-            .select_related("tag") \
-            .filter(content_type=contenttype, object_id=1)
+    result = TaggedItem.objects.get_tags_for(Product, 1)
 
     return render(request, "hello.html", {"name": "Ikechukwu Agbarakwe", "result": result})
