@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from django.db.models.aggregates import Count, Min
-from store.models import Product
+from django.db.models import Value, F
+from store.models import Product, OrderItem
 
 
 
 def say_hello(request):
-    result = Product.objects.aggregate(count=Count("id"), min=Min("unit_price"))
+    result = OrderItem.objects.annotate(sub_total=F("unit_price") * F("quantity"))
     return render(request, "hello.html", {"name": "Ikechukwu Agbarakwe", "result": result})
