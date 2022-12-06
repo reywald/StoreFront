@@ -78,7 +78,7 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.placed_at
+        return str(self.placed_at)
 
 
 class OrderItem(models.Model):
