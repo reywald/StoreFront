@@ -55,7 +55,10 @@ class Customer(models.Model):
         max_length=1, choices=MEMBERSHIP_STATUS, default=MEMBERSHIP_BRONZE)
 
     def __str__(self) -> str:
-        return self.first_name
+        return f"{self.first_name} {self.last_name}"
+
+    class Meta:
+        ordering = ['first_name', 'last_name']
 
 
 class Order(models.Model):
@@ -73,6 +76,9 @@ class Order(models.Model):
     payment_status = models.CharField(max_length=1,
                                       choices=PAYMENT_STATUS_CHOICES, default=PAYMENT_PENDING)
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.placed_at
 
 
 class OrderItem(models.Model):
