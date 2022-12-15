@@ -1,10 +1,13 @@
 from urllib.parse import urlencode
 
 from django.contrib import admin, messages
+from django.contrib.contenttypes.admin import GenericTabularInline
 from django.db.models import Count
 from django.http import HttpRequest
 from django.urls import reverse
 from django.utils.html import format_html
+
+from tags.models import TaggedItem
 
 from . import models
 
@@ -44,10 +47,16 @@ class InventoryFilter(admin.SimpleListFilter):
             return queryset.filter(inventory__lt=10)
 
 
+class TagInline(GenericTabularInline):
+    autocomplete_fields = ["tag"]
+    model = TaggedItem
+
+
 @admin.register(models.Product)
 class ProductAdmin(admin.ModelAdmin):
     autocomplete_fields = ['collection']
     actions = ["clear_inventory"]
+    inlines = [TagInline]
     list_display = ['title', 'unit_price', 'inventory_status', 'collection']
     list_editable = ['unit_price']
     list_filter = ["collection", "last_update", InventoryFilter]
